@@ -1,0 +1,89 @@
+plugins {
+    alias(libs.plugins.android.library)
+    id 'maven-publish'
+    id 'signing'
+}
+
+android {
+    namespace 'com.raviteja.rvcircleimageview'
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 26
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+}
+
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            release(MavenPublication) {
+//                from components.release
+//
+//                groupId = 'io.github.ravitejaemandi' // replace with your group ID
+//                artifactId = 'rvcircleimageview'
+//                version = '1.0.0'
+//
+//                pom {
+//                    name = 'RVCircleImageView'
+//                    description = 'A customizable circular ImageView for Android'
+//                    url = 'https://github.com/ravitejaemandi/RVCircleImageView' // update to your GitHub URL
+//
+//                    licenses {
+//                        license {
+//                            name = 'The Apache License, Version 2.0'
+//                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                        }
+//                    }
+//                    developers {
+//                        developer {
+//                            id = 'ravitejaemandi'
+//                            name = 'Raviteja Emandi'
+//                            email = 'you@example.com'
+//                        }
+//                    }
+//                    scm {
+//                        connection = 'scm:git:github.com/ravitejaemandi/RVCircleImageView.git'
+//                        developerConnection = 'scm:git:ssh://github.com/ravitejaemandi/RVCircleImageView.git'
+//                        url = 'https://github.com/ravitejaemandi/RVCircleImageView'
+//                    }
+//                }
+//            }
+//        }
+//
+//        repositories {
+//            maven {
+//                name = "OSSRH"
+//                url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+//                credentials {
+//                    username = ossrhUsername
+//                    password = ossrhPassword
+//                }
+//            }
+//        }
+//    }
+//
+//    signing {
+//        useInMemoryPgpKeys(signing.keyId, signing.secretKey, signing.password)
+//        sign publishing.publications.release
+//    }
+//}
