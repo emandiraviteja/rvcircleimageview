@@ -33,57 +33,67 @@ android {
     }
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            release(MavenPublication) {
-//                from components.release
-//
-//                groupId = 'io.github.ravitejaemandi' // replace with your group ID
-//                artifactId = 'rvcircleimageview'
-//                version = '1.0.0'
-//
-//                pom {
-//                    name = 'RVCircleImageView'
-//                    description = 'A customizable circular ImageView for Android'
-//                    url = 'https://github.com/ravitejaemandi/RVCircleImageView' // update to your GitHub URL
-//
-//                    licenses {
-//                        license {
-//                            name = 'The Apache License, Version 2.0'
-//                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-//                        }
-//                    }
-//                    developers {
-//                        developer {
-//                            id = 'ravitejaemandi'
-//                            name = 'Raviteja Emandi'
-//                            email = 'you@example.com'
-//                        }
-//                    }
-//                    scm {
-//                        connection = 'scm:git:github.com/ravitejaemandi/RVCircleImageView.git'
-//                        developerConnection = 'scm:git:ssh://github.com/ravitejaemandi/RVCircleImageView.git'
-//                        url = 'https://github.com/ravitejaemandi/RVCircleImageView'
-//                    }
-//                }
-//            }
-//        }
-//
-//        repositories {
-//            maven {
-//                name = "OSSRH"
-//                url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-//                credentials {
-//                    username = ossrhUsername
-//                    password = ossrhPassword
-//                }
-//            }
-//        }
-//    }
-//
-//    signing {
-//        useInMemoryPgpKeys(signing.keyId, signing.secretKey, signing.password)
-//        sign publishing.publications.release
-//    }
-//}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'io.github.emandiraviteja'      // your groupId
+                artifactId = 'rvcircleimageview'           // your artifactId
+                version = '1.0.0'                          // your version
+
+                pom {
+                    name.set('RVCircleImageView')
+                    description.set('A customizable circular ImageView for Android.')
+                    url.set('https://github.com/emandiraviteja/rvcircleimageview')
+
+                    licenses {
+                        license {
+                            name.set('The Apache License, Version 2.0')
+                            url.set('https://www.apache.org/licenses/LICENSE-2.0.txt')
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id.set('emandiraviteja')
+                            name.set('Raviteja Emandi')
+                            email.set('teju.emandi@gmail.com')
+                        }
+                    }
+
+                    scm {
+                        connection.set('scm:git:git://github.com/emandiraviteja/rvcircleimageview.git')
+                        developerConnection.set('scm:git:ssh://github.com/emandiraviteja/rvcircleimageview.git')
+                        url.set('https://github.com/emandiraviteja/rvcircleimageview')
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                name = "OSSRH"
+                url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+                credentials {
+                    username = project.findProperty("ossrhUsername") ?: "teju.emandi@gmail.com"
+                    password = project.findProperty("ossrhPassword") ?: "Laalasateja@85"
+                }
+            }
+        }
+    }
+
+    signing {
+        useInMemoryPgpKeys(
+                findProperty("signing.keyId"),
+                new File(findProperty("signing.secretKeyRingFile")).text,
+                findProperty("signing.password")
+        )
+        sign publishing.publications.release
+    }
+}
+
+dependencies {
+    implementation libs.annotation.jvm
+}
